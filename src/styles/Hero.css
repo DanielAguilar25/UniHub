@@ -1,0 +1,98 @@
+.uh-hero {
+  padding: 5rem 2rem 4rem;
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.uh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(74, 222, 128, 0.1);
+  border: 0.5px solid rgba(74, 222, 128, 0.3);
+  color: #4ade80;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.uh-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.uh-hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  color: #fff;
+  margin-bottom: 1.25rem;
+}
+
+.uh-hero h1 em {
+  font-style: normal;
+  color: #4ade80;
+}
+
+.uh-hero p {
+  font-size: 16px;
+  color: rgba(232, 234, 240, 0.55);
+  max-width: 520px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+.uh-hero-cta {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.uh-btn-large {
+  background: #4ade80;
+  border: none;
+  color: #0d1a12;
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: opacity 0.2s;
+}
+
+.uh-btn-large:hover {
+  opacity: 0.88;
+}
+
+.uh-btn-large-ghost {
+  background: transparent;
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  color: rgba(232, 234, 240, 0.8);
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.uh-btn-large-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
