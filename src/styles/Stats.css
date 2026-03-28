@@ -1,0 +1,35 @@
+.uh-stats {
+  display: flex;
+  justify-content: center;
+  border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  flex-wrap: wrap;
+}
+
+.uh-stat {
+  flex: 1;
+  min-width: 140px;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  border-right: 0.5px solid rgba(255, 255, 255, 0.06);
+}
+
+.uh-stat:last-child {
+  border-right: none;
+}
+
+.uh-stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+}
+
+.uh-stat-lbl {
+  font-size: 12px;
+  color: rgba(232, 234, 240, 0.4);
+  margin-top: 2px;
+  letter-spacing: 0.3px;
+}
