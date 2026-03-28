@@ -10,7 +10,7 @@ export default function Footer() {
         <li><a href="#">Clubs</a></li>
         <li><a href="#">GitHub</a></li>
       </ul>
-      <span className="uh-footer-copy">UTRGV CECS · Spring 2025</span>
+      <span className="uh-footer-copy">UTRGV CECS · Spring 2026</span>
     </footer>
   );
 }
