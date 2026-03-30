@@ -1,0 +1,38 @@
+.uh-footer {
+  border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.uh-footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.uh-footer-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.uh-footer-links a {
+  text-decoration: none;
+  font-size: 13px;
+  color: rgba(232, 234, 240, 0.35);
+  transition: color 0.2s;
+}
+
+.uh-footer-links a:hover {
+  color: rgba(232, 234, 240, 0.7);
+}
+
+.uh-footer-copy {
+  font-size: 12px;
+  color: rgba(232, 234, 240, 0.25);
+}
