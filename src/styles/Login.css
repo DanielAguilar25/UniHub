@@ -1,0 +1,311 @@
+.login-page {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    font-family: system-ui, sans-serif;
+  }
+  
+  .login-branding {
+    width: 38%;
+    background: #F8B56D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+    gap: 32px;
+  }
+  
+  .login-logo {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .login-logo .logo-part {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+  
+  .login-logo .logo-part.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .login-brand-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-brand-divider {
+    width: 1px;
+    height: 100px;
+    background: #1a1a1a;
+    opacity: 0.2;
+    flex-shrink: 0;
+  }
+  
+  .login-brand-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  .login-branding h2 {
+    font-size: 28px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 12px 0 0;
+    letter-spacing: 1px;
+  }
+  
+  .login-brand-static {
+    font-size: 16px;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+  }
+  
+  .login-brand-verb {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    display: block;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  
+  .login-brand-verb.fade-out {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  
+  .login-brand-verb.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .login-form-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 8%;
+    position: relative;
+    transition: background 0.3s;
+  }
+  
+  .login-page.dark .login-form-side {
+    background: #111;
+  }
+  
+  .login-page.light .login-form-side {
+    background: #f5f4f0;
+  }
+  
+  .login-form-side h1 {
+    font-size: 36px;
+    font-weight: 500;
+    margin: 0 0 6px;
+  }
+  
+  .login-page.dark .login-form-side h1 {
+    color: #fff;
+  }
+  
+  .login-page.light .login-form-side h1 {
+    color: #1a1a1a;
+  }
+  
+  .login-subtitle {
+    font-size: 18px;
+    margin: 0 0 32px;
+  }
+  
+  .login-page.dark .login-subtitle {
+    color: #999;
+  }
+  
+  .login-page.light .login-subtitle {
+    color: #666;
+  }
+  
+  .login-form-side label {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .login-page.dark label {
+    color: #aaa;
+  }
+  
+  .login-page.light label {
+    color: #555;
+  }
+  
+  .login-form-side input {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 17px;
+    margin-bottom: 20px;
+    outline: none;
+    border: 1px solid;
+    transition: border 0.2s, background 0.3s;
+  }
+  
+  .login-page.dark input {
+    background: #1e1e1e;
+    border-color: #333;
+    color: #fff;
+  }
+  
+  .login-page.light input {
+    background: #fff;
+    border-color: #ddd;
+    color: #1a1a1a;
+  }
+  
+  .login-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 24px;
+    background: #B7C684;
+    color: #1a1a1a;
+  }
+  
+  .login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .login-divider hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid;
+  }
+  
+  .login-page.dark .login-divider hr {
+    border-color: #2a2a2a;
+  }
+  
+  .login-page.light .login-divider hr {
+    border-color: #ddd;
+  }
+  
+  .login-divider span {
+    font-size: 14px;
+  }
+  
+  .login-page.dark .login-divider span {
+    color: #555;
+  }
+  
+  .login-page.light .login-divider span {
+    color: #aaa;
+  }
+  
+  .oauth-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  
+  .oauth-btn {
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 15px;
+    text-align: center;
+    cursor: not-allowed;
+    border: 1px solid;
+  }
+  
+  .login-page.dark .oauth-btn {
+    background: #1e1e1e;
+    border-color: #2a2a2a;
+    color: #555;
+  }
+  
+  .login-page.light .oauth-btn {
+    background: #eee;
+    border-color: #ddd;
+    color: #aaa;
+  }
+  
+  .oauth-btn small {
+    display: block;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  
+  .login-page.dark .oauth-btn small {
+    color: #444;
+  }
+  
+  .login-page.light .oauth-btn small {
+    color: #bbb;
+  }
+  
+  .login-footer {
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+  }
+  
+  .login-page.dark .login-footer {
+    color: #888;
+  }
+  
+  .login-page.light .login-footer {
+    color: #666;
+  }
+  
+  .login-footer a {
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.6s;
+  }
+  
+  .login-error {
+    color: #e05c5c;
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+  
+  .bulb-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  
+  .bulb-btn svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  @media (max-width: 768px) {
+    .login-page {
+      flex-direction: column;
+    }
+    .login-branding {
+      width: 100%;
+      padding: 32px 24px;
+    }
+    .login-form-side {
+      padding: 40px 24px;
+    }
+  }

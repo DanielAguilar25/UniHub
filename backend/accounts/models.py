@@ -18,6 +18,7 @@ class Profile(models.Model):
     graduation_year = models.IntegerField(choices=GRADUATION_YEAR_CHOICES)
     current_classes = models.TextField(blank=True)
     # future fields: linkedin, instagram, profile picture, etc.
+    # future update: minor, gender, school_id
 
     def __str__(self):
         return self.user.username
