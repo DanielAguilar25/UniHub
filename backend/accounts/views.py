@@ -44,6 +44,10 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            # create profile if it doesn't exist
+            from .models import Profile
+            Profile.objects.get_or_create(user=user)
             return JsonResponse({'message': 'login successful'})
         else:
             return JsonResponse({'error': 'invalid credentials'}, status=400)
+    return JsonResponse({'message': 'send a POST request to login'})

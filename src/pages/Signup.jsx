@@ -183,6 +183,7 @@ export default function SignupPage() {
         <input
           type="email"
           placeholder="yourname@utrgv.edu"
+          autoComplete="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
         />
@@ -192,6 +193,7 @@ export default function SignupPage() {
         <input
           type="password"
           placeholder="create a password (min 8 characters)"
+          autoComplete="new-password"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
