@@ -1,5 +1,5 @@
 # UniHub
-A campus web app for UTRGV College of Engineering and Computer Science (CECS) students 
+A campus website for UTRGV College of Engineering and Computer Science (CECS) students 
 to find study partners, discover clubs, stay updated on campus events, and connect with peers.
 
 ---
