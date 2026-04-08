@@ -25,6 +25,8 @@ def register(request):
             return JsonResponse({'error': 'username already taken'}, status=400)
 
         user = User.objects.create_user(username=username, email=email, password=password)
+        from .models import Profile
+        Profile.objects.get_or_create(user=user)
         user.profile.preferred_name = preferred_name
         user.profile.major = major
         user.profile.graduation_year = graduation_year
