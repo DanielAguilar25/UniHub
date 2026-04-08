@@ -52,6 +52,7 @@ export default function SignupPage() {
   const [dropdown, setDropdown] = useState([])
   const [errors, setErrors] = useState({})
   const [mode, setMode] = useState('dark')
+  const [serverStatus, setServerStatus] = useState(null)
   const bulbRef = useRef(null)
   const navigate = useNavigate()
 
@@ -106,25 +107,30 @@ export default function SignupPage() {
     }
     setErrors({})
 
-    const response = await fetch('http://127.0.0.1:8000/api/accounts/register/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-        password,
-        username,
-        preferred_name: preferredName,
-        major,
-        graduation_year: parseInt(gradYear),
-        current_classes: classes.join(', '),
-      }),
-    })
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/register/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          password,
+          username,
+          preferred_name: preferredName,
+          major,
+          graduation_year: parseInt(gradYear),
+          current_classes: classes.join(', '),
+        }),
+      })
 
-    const data = await response.json()
-    if (response.ok) {
-      navigate('/login')
-    } else {
-      setErrors({ server: data.error })
+      const data = await response.json()
+      if (response.ok) {
+        navigate('/login')
+      } else {
+        setErrors({ server: data.error })
+        setServerStatus(response.status)
+      }
+    } catch (err) {
+      setErrors({ server: 'something went wrong, please try again' })
     }
   }
 
@@ -272,7 +278,16 @@ export default function SignupPage() {
         </div>
         <p className="signup-hint">used to build your for you feed</p>
 
-        {errors.server && <p className="signup-field-error">{errors.server}</p>}
+        {errors.server && (
+          <p className="signup-field-error">
+            {errors.server}{' '}
+            {serverStatus && (
+              <a href={`https://http.cat/status/${serverStatus}`} target="_blank" rel="noreferrer">
+                learn more
+              </a>
+            )}
+          </p>
+        )}
 
         <button className="signup-btn" onClick={handleSignup}>create account</button>
 

@@ -8,6 +8,7 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [mode, setMode] = useState('dark')
   const [accentColor, setAccentColor] = useState('#B7C684')
+  const [errorStatus, setErrorStatus] = useState(null)
   const signupRef = useRef(null)
   const bulbRef = useRef(null)
   const navigate = useNavigate()
@@ -62,6 +63,7 @@ export default function LoginPage() {
       navigate('/home')
     } else {
       setError(data.error)
+      setErrorStatus(response.status)
     }
   }
 
@@ -128,7 +130,16 @@ export default function LoginPage() {
           onChange={e => setPassword(e.target.value)}
         />
 
-        {error && <p className="login-error">{error}</p>}
+        {error && (
+          <p className="login-error">
+            {error}{' '}
+            {errorStatus && (
+              <a href={`https://http.cat/status/${errorStatus}`} target="_blank" rel="noreferrer">
+                learn more
+              </a>
+            )}
+          </p>
+        )}
 
         <button className="login-btn" onClick={handleLogin}>log in</button>
 
