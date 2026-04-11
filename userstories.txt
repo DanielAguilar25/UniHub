@@ -1,0 +1,27 @@
+Create user stories by defining user needs in the format:
+"As a [type of user], I want [an action] so that [a benefit]".
+
+Admin: (Note to self: maybe be in more detail?)
+    as an admin, i want to log into UniHub and be able to edit the website
+    as an admin, i want to be able to fix bugs so that there are no bugs
+    as an admin, i want to be able to mess with the visuals so that i can change how the website looks
+    as an admin, i want to be able to see the users so that i can know who is a member of UniHub
+
+
+Student: (Will be in more detail as we go along)
+    As a student, I want to be able to sign up for UniHub so that I can be a member
+    As a student, I want to choose what classes I'm currently taking so that I can get recommended study rooms/groups that have in common with me
+    As a student, I want to log into UniHub so that i can access the homepage
+    As a student, I want to enter my current classes so that I can be recommended study groups
+    As a student, I want to choose what study group I can be in so that I can join it/them
+    As a student, I want to be able to have access to messaging so I can message different people
+    As a student, I want to be able to have access to the community tab so that I can be able to post community posts for other people to see
+    As a student, I want to be able to reply to community posts so that I can add to the community
+
+    
+
+Creator: (Will be in more detail as we go along)
+    As a creator, I want to be able to create a study group/room so that I can be a leader of it
+    As a creator, I want to admin the study group/room I created so I can edit it, see the users (Basically have admin permissions to the study group/room they created)
+    As a creator, I want to have not admin permissions so that I can still be a student in my own study group
+    As a creator, I want to be able to send notifications so that I can notify the users that are in my study group
