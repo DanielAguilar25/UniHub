@@ -9,6 +9,8 @@ export default function LoginPage() {
   const [mode, setMode] = useState('dark')
   const [accentColor, setAccentColor] = useState('#B7C684')
   const [errorStatus, setErrorStatus] = useState(null)
+  const [loading, setLoading] = useState(false) // ✅ ADDED
+
   const signupRef = useRef(null)
   const bulbRef = useRef(null)
   const navigate = useNavigate()
@@ -53,18 +55,29 @@ export default function LoginPage() {
   }, [])
 
   async function handleLogin() {
-    const response = await fetch('http://127.0.0.1:8000/api/accounts/login/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    })
-    const data = await response.json()
-    if (response.ok) {
-      navigate('/home')
-    } else {
-      setError(data.error)
-      setErrorStatus(response.status)
+    setLoading(true) // ✅ START LOADING
+    setError('')
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/accounts/login/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        navigate('/home')
+      } else {
+        setError(data.error)
+        setErrorStatus(response.status)
+      }
+    } catch (err) {
+      setError('network error')
     }
+
+    setLoading(false) // ✅ STOP LOADING
   }
 
   function toggleMode() {
@@ -115,8 +128,6 @@ export default function LoginPage() {
         <label>username</label>
         <input
           type="text"
-          placeholder="your username"
-          autoComplete="username"
           value={username}
           onChange={e => setUsername(e.target.value)}
         />
@@ -124,8 +135,6 @@ export default function LoginPage() {
         <label>password</label>
         <input
           type="password"
-          placeholder="••••••••"
-          autoComplete="current-password"
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
@@ -141,7 +150,14 @@ export default function LoginPage() {
           </p>
         )}
 
-        <button className="login-btn" onClick={handleLogin}>log in</button>
+        {/* 🔥 BUTTON WITH LOADING STATE */}
+        <button
+          className="login-btn"
+          onClick={handleLogin}
+          disabled={loading}
+        >
+          {loading ? 'logging in...' : 'log in'}
+        </button>
 
         <div className="login-divider">
           <hr /><span>or continue with</span><hr />
@@ -154,7 +170,9 @@ export default function LoginPage() {
 
         <p className="login-footer">
           no account?{' '}
-          <a href="/signup" ref={signupRef} style={{ color: accentColor }}>sign up</a>
+          <a href="/signup" ref={signupRef} style={{ color: accentColor }}>
+            sign up
+          </a>
         </p>
       </div>
     </div>
