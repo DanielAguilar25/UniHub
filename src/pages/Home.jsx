@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/Home.css'
+import StudyPartnersList from '../components/home/StudyPartnersList'
+import EventsList from '../components/home/EventsList'
 
 const SECTIONS = {
   foryou: ['feed', 'activity', 'recommended', 'groups', 'schedule'],
@@ -114,6 +116,10 @@ export default function HomePage() {
               </div>
             </div>
           </>
+        ) : section === 'study' && sub === 'find partners' ? (
+          <StudyPartnersList />
+        ) : section === 'explore' ? (
+          <EventsList />
         ) : (
           <div className="coming-soon">
             <p>{sub}</p>
