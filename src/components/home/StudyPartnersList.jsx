@@ -19,7 +19,7 @@ export default function StudyPartnersList() {
   )
 
   return (
-    <div>
+    <div style={{ padding: '0 28px' }}>
       <div className="main-header">
         <p className="main-title">Find Partners</p>
         <p className="main-sub">connect with classmates by course or subject</p>

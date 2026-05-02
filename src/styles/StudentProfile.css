@@ -1,0 +1,248 @@
+/* MAIN CARD */
+.pr-card {
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* TOP ROW */
+.pr-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.75rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.pr-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(183, 198, 132, 0.15);
+  color: #B7C684;
+  font-size: 26px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(183, 198, 132, 0.2);
+}
+
+.pr-identity {
+  flex: 1;
+}
+
+.pr-identity h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.pr-username {
+  font-size: 13px;
+  color: #555;
+  margin: 0 0 10px;
+}
+
+.pr-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pr-badge-green {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: rgba(183, 198, 132, 0.1);
+  color: #B7C684;
+  border: 1px solid rgba(183, 198, 132, 0.2);
+  font-weight: 600;
+}
+
+.pr-badge-orange {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: rgba(248, 181, 109, 0.1);
+  color: #F8B56D;
+  border: 1px solid rgba(248, 181, 109, 0.2);
+  font-weight: 600;
+}
+
+/* ACTIONS */
+.pr-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.pr-btn-edit {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  color: #888;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: system-ui, sans-serif;
+  transition: all 0.2s;
+}
+
+.pr-btn-edit:hover {
+  border-color: #B7C684;
+  color: #B7C684;
+}
+
+.pr-btn-save {
+  background: #B7C684;
+  border: none;
+  color: #1a1a1a;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: system-ui, sans-serif;
+  transition: opacity 0.2s;
+}
+
+.pr-btn-save:hover { opacity: 0.88; }
+
+.pr-btn-cancel {
+  background: transparent;
+  border: 1px solid #2a2a2a;
+  color: #666;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: system-ui, sans-serif;
+  transition: all 0.2s;
+}
+
+.pr-btn-cancel:hover {
+  border-color: #444;
+  color: #aaa;
+}
+
+/* STATS */
+.pr-stats {
+  display: flex;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.pr-stat {
+  flex: 1;
+  padding: 1.25rem;
+  text-align: center;
+  border-right: 1px solid #1a1a1a;
+}
+
+.pr-stat:last-child { border-right: none; }
+
+.pr-stat-num {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.pr-stat-lbl {
+  font-size: 11px;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+/* SECTIONS */
+.pr-section {
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.pr-section:last-child { border-bottom: none; }
+
+.pr-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #444;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.pr-bio {
+  font-size: 14px;
+  color: #888;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* INPUT / TEXTAREA */
+.pr-input {
+  width: 100%;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  outline: none;
+  margin-bottom: 4px;
+}
+
+.pr-textarea {
+  width: 100%;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #fff;
+  font-family: system-ui, sans-serif;
+  outline: none;
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.6;
+  box-sizing: border-box;
+}
+
+/* TAGS */
+.pr-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pr-course-tag {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(248, 181, 109, 0.1);
+  color: #F8B56D;
+  border: 1px solid rgba(248, 181, 109, 0.2);
+  font-weight: 500;
+}
+
+.pr-club-tag {
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(183, 198, 132, 0.1);
+  color: #B7C684;
+  border: 1px solid rgba(183, 198, 132, 0.2);
+  font-weight: 500;
+}
