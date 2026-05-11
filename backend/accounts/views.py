@@ -66,6 +66,7 @@ def profile_data(request):
         'major': profile.major,
         'graduation_year': profile.graduation_year,
         'current_classes': profile.current_classes,
+        'hashtags': profile.hashtags,
     })
     
 @csrf_exempt
@@ -83,6 +84,7 @@ def users_list(request):
             'major': p.major,
             'graduation_year': p.graduation_year,
             'current_classes': p.current_classes,
+            'hashtags': p.hashtags,
         })
     return JsonResponse({'users': users})
 
@@ -115,4 +117,55 @@ def send_connect_email(request):
 
         return JsonResponse({'message': 'email sent successfully'})
 
+    return JsonResponse({'error': 'POST only'}, status=405)
+
+@csrf_exempt
+def get_schedule(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'not logged in'}, status=401)
+    
+    from .models import ScheduleEntry
+    entries = ScheduleEntry.objects.filter(user=request.user)
+    schedule = {}
+    for entry in entries:
+        key = f'{entry.day}_{entry.time_slot}'
+        schedule[key] = entry.class_name
+    return JsonResponse({'schedule': schedule})
+
+@csrf_exempt
+def save_schedule(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'not logged in'}, status=401)
+    
+    if request.method == 'POST':
+        from .models import ScheduleEntry
+        data = json.loads(request.body)
+        entries = data.get('entries', [])
+        
+        # clear existing schedule first
+        ScheduleEntry.objects.filter(user=request.user).delete()
+        
+        # save new entries
+        for entry in entries:
+            ScheduleEntry.objects.create(
+                user=request.user,
+                day=entry['day'],
+                time_slot=entry['time_slot'],
+                class_name=entry['class_name'],
+            )
+        
+        return JsonResponse({'message': 'schedule saved'})
+    return JsonResponse({'error': 'POST only'}, status=405)
+
+@csrf_exempt
+def save_hashtags(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'not logged in'}, status=401)
+    
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        hashtags = data.get('hashtags', '')
+        request.user.profile.hashtags = hashtags
+        request.user.profile.save()
+        return JsonResponse({'message': 'hashtags saved'})
     return JsonResponse({'error': 'POST only'}, status=405)

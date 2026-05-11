@@ -3,17 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import '../styles/Home.css'
 import StudyPartnersList from '../components/home/StudyPartnersList'
 import EventsList from '../components/home/EventsList'
+import ScheduleView from '../components/home/ScheduleView'
+import HashtagModal from '../components/home/HashtagModal'
+
 
 const SECTIONS = {
   foryou: ['feed', 'activity', 'recommended', 'groups', 'schedule'],
-  explore: ['trending', 'search', 'categories'],
-  clubs: ['my clubs', 'discover', 'events'],
   study: ['find partners', 'my groups', 'resources'],
   schedule: ['my schedule', 'availability', 'reminders'],
   profile: ['my profile', 'settings', 'achievements'],
 }
-
 export default function HomePage() {
+  const [showHashtagModal, setShowHashtagModal] = useState(false)
   const [mode, setMode] = useState('dark')
   const [section, setSection] = useState('foryou')
   const [sub, setSub] = useState('feed')
@@ -50,12 +51,10 @@ export default function HomePage() {
         </svg>
 
         {[
-          { key: 'foryou', sym: '⊞', label: 'for you' },
-          { key: 'explore', sym: '◎', label: 'explore' },
-          { key: 'clubs', sym: '◉', label: 'clubs' },
-          { key: 'study', sym: '✎', label: 'study' },
-          { key: 'schedule', sym: '▦', label: 'schedule' },
-        ].map(item => (
+        { key: 'foryou', sym: '⊞', label: 'for you' },
+        { key: 'study', sym: '✎', label: 'study' },
+        { key: 'schedule', sym: '▦', label: 'schedule' },
+      ].map(item => (
           <button
             key={item.key}
             className={`icon-btn ${section === item.key ? 'active' : ''}`}
@@ -121,11 +120,24 @@ export default function HomePage() {
               )}
             </div>
             <div className="tags-section">
-              <p className="section-label">YOUR TAGS</p>
-              <div className="tags-row">
-                <div className="tag">#no tags yet</div>
-              </div>
+            <p className="section-label">YOUR TAGS</p>
+            <div className="tags-row">
+              {profile?.hashtags ? (
+                profile.hashtags.split(',').map(tag => (
+                  <div key={tag} className="tag">{tag.trim()}</div>
+                ))
+              ) : (
+                <div className="tag" style={{ cursor: 'pointer', opacity: 0.6 }} onClick={() => setShowHashtagModal(true)}>
+                  #no tags yet — click to add
+                </div>
+              )}
+              {profile?.hashtags && (
+                <div className="tag" style={{ cursor: 'pointer', opacity: 0.6 }} onClick={() => setShowHashtagModal(true)}>
+                  + edit
+                </div>
+              )}
             </div>
+          </div>
             <div className="posts-section">
               <p className="section-label">POSTS</p>
               <div className="empty-state">
@@ -136,15 +148,27 @@ export default function HomePage() {
           </>
         ) : section === 'study' && sub === 'find partners' ? (
           <StudyPartnersList />
-        ) : section === 'explore' ? (
-          <EventsList />
+        ) : section === 'schedule' && sub === 'my schedule' ? (
+          <ScheduleView userClasses={profile?.current_classes} />
         ) : (
           <div className="coming-soon">
             <p>{sub}</p>
             <small>coming soon</small>
           </div>
+
         )}
       </div>
+
+      {showHashtagModal && (
+        <HashtagModal
+          current={profile?.hashtags || ''}
+          onSave={(tags) => {
+            setProfile(prev => ({ ...prev, hashtags: tags }))
+            setShowHashtagModal(false)
+          }}
+          onClose={() => setShowHashtagModal(false)}
+        />
+      )}
     </div>
   )
 }

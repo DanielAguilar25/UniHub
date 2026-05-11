@@ -97,10 +97,24 @@ export default function StudyPartnersList() {
                   {MAJOR_LABELS[partner.major] || partner.major} · {partner.graduation_year}
                 </p>
                 <div className="sp-courses">
-                  {(partner.current_classes || '').split(', ').map(course => (
-                    <span key={course} className="sp-course-tag">{course}</span>
+                {(partner.current_classes || '').split(', ').map(course => (
+                  <span key={course} className="sp-course-tag">{course}</span>
+                ))}
+              </div>
+              {partner.hashtags && (
+                <div className="sp-courses" style={{ marginTop: '6px' }}>
+                  {partner.hashtags.split(',').map(tag => (
+                    <span key={tag} style={{
+                      fontSize: '11px', color: '#F8B56D',
+                      background: '#F8B56D20', border: '1px solid #F8B56D50',
+                      borderRadius: '12px', padding: '2px 8px',
+                      marginRight: '4px'
+                    }}>
+                      {tag.trim()}
+                    </span>
                   ))}
                 </div>
+              )}
               </div>
               <button
               className="sp-connect-btn"

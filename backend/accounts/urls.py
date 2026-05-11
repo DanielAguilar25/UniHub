@@ -7,4 +7,7 @@ urlpatterns = [
     path('profile/', views.profile_data, name='profile_data'),
     path('users/', views.users_list, name='users_list'),
     path('connect/', views.send_connect_email, name='send_connect_email'),
+    path('schedule/', views.get_schedule, name='get_schedule'),
+    path('schedule/save/', views.save_schedule, name='save_schedule'),
+    path('hashtags/', views.save_hashtags, name='save_hashtags'),
 ]
