@@ -108,8 +108,7 @@ export default function SignupPage() {
     setErrors({})
 
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/api/accounts/register/', {
-        method: 'POST',
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/register/`, {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email,

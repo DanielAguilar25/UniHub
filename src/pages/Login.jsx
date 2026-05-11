@@ -57,9 +57,10 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
     try {
-      const response = await fetch('${import.meta.env.VITE_API_URL}/api/accounts/login/', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ username, password }),
       })
       const data = await response.json()
