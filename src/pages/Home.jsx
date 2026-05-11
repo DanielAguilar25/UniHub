@@ -21,7 +21,7 @@ export default function HomePage() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/accounts/profile/', {
+    fetch('${import.meta.env.VITE_API_URL}/api/accounts/profile/', {
       credentials: 'include',
     })
       .then(res => res.json())
