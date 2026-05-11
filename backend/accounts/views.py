@@ -53,3 +53,17 @@ def login_view(request):
         else:
             return JsonResponse({'error': 'invalid credentials'}, status=400)
     return JsonResponse({'message': 'send a POST request to login'})
+
+
+@csrf_exempt
+def profile_data(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'not logged in'}, status=401)
+    
+    profile = request.user.profile
+    return JsonResponse({
+        'preferred_name': profile.preferred_name,
+        'major': profile.major,
+        'graduation_year': profile.graduation_year,
+        'current_classes': profile.current_classes,
+    })

@@ -31,7 +31,7 @@ INSTALLED_APPS = [
 ]
 
 
-# ✅ MIDDLEWARE (CORS MUST BE FIRST)
+#  MIDDLEWARE (CORS MUST BE FIRST)
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 
@@ -93,8 +93,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 
-# ✅ CORS FIX (IMPORTANT)
-CORS_ALLOW_ALL_ORIGINS = True
+#  CORS FIX (IMPORTANT)
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
 
 # (alternative safer option if needed)
 # CORS_ALLOWED_ORIGINS = [
@@ -102,4 +105,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     "http://127.0.0.1:5176",
 # ]
 
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SECURE = False
 CORS_ALLOW_CREDENTIALS = True
