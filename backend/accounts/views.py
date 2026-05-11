@@ -67,3 +67,52 @@ def profile_data(request):
         'graduation_year': profile.graduation_year,
         'current_classes': profile.current_classes,
     })
+    
+@csrf_exempt
+def users_list(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'not logged in'}, status=401)
+    
+    from .models import Profile
+    profiles = Profile.objects.select_related('user').all()
+    users = []
+    for p in profiles:
+        users.append({
+            'username': p.user.username,
+            'preferred_name': p.preferred_name,
+            'major': p.major,
+            'graduation_year': p.graduation_year,
+            'current_classes': p.current_classes,
+        })
+    return JsonResponse({'users': users})
+
+@csrf_exempt
+def send_connect_email(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'not logged in'}, status=401)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        recipient_username = data.get('username')
+        message = data.get('message')
+
+        try:
+            recipient = User.objects.get(username=recipient_username)
+        except User.DoesNotExist:
+            return JsonResponse({'error': 'user not found'}, status=404)
+
+        sender_name = request.user.profile.preferred_name or request.user.username
+
+        from django.core.mail import send_mail
+        from django.conf import settings
+
+        send_mail(
+            subject=f'UniHub: {sender_name} wants to connect with you',
+            message=f'Hi {recipient.profile.preferred_name or recipient.username},\n\n{sender_name} sent you a message on UniHub:\n\n"{message}"\n\nReply directly to {request.user.email} to continue the conversation.',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[recipient.email],
+        )
+
+        return JsonResponse({'message': 'email sent successfully'})
+
+    return JsonResponse({'error': 'POST only'}, status=405)
