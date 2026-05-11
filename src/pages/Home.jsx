@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/Home.css'
 import StudyPartnersList from '../components/home/StudyPartnersList'
@@ -17,7 +17,16 @@ export default function HomePage() {
   const [mode, setMode] = useState('dark')
   const [section, setSection] = useState('foryou')
   const [sub, setSub] = useState('feed')
+  const [profile, setProfile] = useState(null)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/api/accounts/profile/', {
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(data => setProfile(data))
+  }, [])
 
   function toggleMode() {
     setMode(prev => prev === 'dark' ? 'light' : 'dark')
@@ -99,8 +108,17 @@ export default function HomePage() {
         {section === 'foryou' && sub === 'feed' ? (
           <>
             <div className="main-header">
-              <p className="main-title">for you</p>
+              <p className="main-title">
+                {profile?.preferred_name ? `hello, ${profile.preferred_name}` : 'for you'}
+              </p>
               <p className="main-sub">based on your major and classes</p>
+              {profile && (
+                <div className="profile-summary">
+                  <p>major: {profile.major}</p>
+                  <p>graduation year: {profile.graduation_year}</p>
+                  <p>classes: {profile.current_classes}</p>
+                </div>
+              )}
             </div>
             <div className="tags-section">
               <p className="section-label">YOUR TAGS</p>

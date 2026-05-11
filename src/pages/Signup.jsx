@@ -45,8 +45,8 @@ export default function SignupPage() {
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
   const [preferredName, setPreferredName] = useState('')
-  const [major, setMajor] = useState('Computer Science')
-  const [gradYear, setGradYear] = useState('2026')
+  const [major, setMajor] = useState('CS')
+  const [gradYear, setGradYear] = useState(2026)
   const [classes, setClasses] = useState(['CSCI 3333'])
   const [classInput, setClassInput] = useState('')
   const [dropdown, setDropdown] = useState([])
@@ -117,7 +117,7 @@ export default function SignupPage() {
           username,
           preferred_name: preferredName,
           major,
-          graduation_year: parseInt(gradYear),
+          graduation_year: gradYear,
           current_classes: classes.join(', '),
         }),
       })
@@ -224,21 +224,21 @@ export default function SignupPage() {
 
         <label>major</label>
         <select value={major} onChange={e => setMajor(e.target.value)}>
-          <option>Computer Science</option>
-          <option>Computer Engineering</option>
-          <option>Electrical Engineering</option>
-          <option>Mechanical Engineering</option>
-          <option>Computer Information Systems</option>
+          <option value="CS">Computer Science</option>
+          <option value="CE">Computer Engineering</option>
+          <option value="EE">Electrical Engineering</option>
+          <option value="ME">Mechanical Engineering</option>
+          <option value="CI">Computer Information Systems</option>
         </select>
 
         <label>graduation year</label>
-        <select value={gradYear} onChange={e => setGradYear(e.target.value)}>
-          <option>2026</option>
-          <option>2027</option>
-          <option>2028</option>
-          <option>2029</option>
-          <option>2030</option>
-          <option>2031</option>
+        <select value={gradYear} onChange={e => setGradYear(parseInt(e.target.value))}>
+          <option value="2026">2026</option>
+          <option value="2027">2027</option>
+          <option value="2028">2028</option>
+          <option value="2029">2029</option>
+          <option value="2030">2030</option>
+          <option value="2031">2031</option>
         </select>
 
         <label>current classes</label>
