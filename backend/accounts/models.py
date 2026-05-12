@@ -8,6 +8,9 @@ MAJOR_CHOICES = [
     ('EE', 'Electrical Engineering'),
     ('ME', 'Mechanical Engineering'),
     ('CI', 'Computer Information Systems'),
+    ('CV', 'Civil Engineering'),
+    ('MF', 'Manufacturing Engineering'),
+    ('CY', 'Cyberspace & Informatics'),
 ]
 
 GRADUATION_YEAR_CHOICES = [(year, year) for year in range(2025, 2031)]
@@ -19,6 +22,7 @@ class Profile(models.Model):
     graduation_year = models.IntegerField(choices=GRADUATION_YEAR_CHOICES, null=True, blank=True)
     current_classes = models.TextField(blank=True)
     hashtags = models.TextField(blank=True)
+    linkedin_url = models.CharField(max_length=200, blank=True)
 
     # future fields: linkedin, instagram, profile picture, etc.
     # future update: minor, gender, school_id

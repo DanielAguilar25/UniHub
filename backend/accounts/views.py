@@ -67,6 +67,7 @@ def profile_data(request):
         'graduation_year': profile.graduation_year,
         'current_classes': profile.current_classes,
         'hashtags': profile.hashtags,
+        'linkedin_url': profile.linkedin_url,
     })
     
 @csrf_exempt
@@ -85,6 +86,7 @@ def users_list(request):
             'graduation_year': p.graduation_year,
             'current_classes': p.current_classes,
             'hashtags': p.hashtags,
+            'linkedin_url': p.linkedin_url,
         })
     return JsonResponse({'users': users})
 
@@ -168,4 +170,68 @@ def save_hashtags(request):
         request.user.profile.hashtags = hashtags
         request.user.profile.save()
         return JsonResponse({'message': 'hashtags saved'})
+    return JsonResponse({'error': 'POST only'}, status=405)
+
+@csrf_exempt
+def update_profile(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'not logged in'}, status=401)
+    
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        profile = request.user.profile
+        profile.linkedin_url = data.get('linkedin_url', profile.linkedin_url)
+        profile.preferred_name = data.get('preferred_name', profile.preferred_name)
+        profile.major = data.get('major', profile.major)
+        profile.graduation_year = data.get('graduation_year', profile.graduation_year)
+        profile.current_classes = data.get('current_classes', profile.current_classes)
+        profile.save()
+        return JsonResponse({'message': 'profile updated'})
+    return JsonResponse({'error': 'POST only'}, status=405)
+
+
+@csrf_exempt
+def reset_password(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'not logged in'}, status=401)
+
+    if request.method == 'POST':
+        import secrets
+        import string
+        from django.core.mail import send_mail
+        from django.conf import settings
+
+        chars = string.ascii_letters + string.digits + '!@#$%'
+        new_password = ''.join(secrets.choice(chars) for _ in range(12))
+
+        request.user.set_password(new_password)
+        request.user.save()
+
+        send_mail(
+            subject='UniHub — your new password',
+            message=f'Hi {request.user.profile.preferred_name or request.user.username},\n\nYour password has been reset. Here is your new temporary password:\n\n{new_password}\n\nPlease log in and update it right away.',
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[request.user.email],
+        )
+
+        return JsonResponse({'message': 'new password sent to your email'})
+    return JsonResponse({'error': 'POST only'}, status=405)
+
+
+@csrf_exempt
+def delete_account(request):
+    if not request.user.is_authenticated:
+        return JsonResponse({'error': 'not logged in'}, status=401)
+
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        password = data.get('password')
+
+        from django.contrib.auth import authenticate
+        user = authenticate(request, username=request.user.username, password=password)
+        if user is None:
+            return JsonResponse({'error': 'incorrect password'}, status=400)
+
+        user.delete()
+        return JsonResponse({'message': 'account deleted'})
     return JsonResponse({'error': 'POST only'}, status=405)

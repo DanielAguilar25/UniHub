@@ -5,11 +5,13 @@ import StudyPartnersList from '../components/home/StudyPartnersList'
 import EventsList from '../components/home/EventsList'
 import ScheduleView from '../components/home/ScheduleView'
 import HashtagModal from '../components/home/HashtagModal'
+import ProfileView from '../components/home/ProfileView'
+import TagBrowser from '../components/home/TagBrowser'
 
 
 const SECTIONS = {
   foryou: ['feed', 'activity', 'recommended', 'groups', 'schedule'],
-  study: ['find partners', 'my groups', 'resources'],
+  directory: ['find people', 'by skill', 'by class'],
   schedule: ['my schedule', 'availability', 'reminders'],
   profile: ['my profile', 'settings', 'achievements'],
 }
@@ -52,7 +54,7 @@ export default function HomePage() {
 
         {[
         { key: 'foryou', sym: '⊞', label: 'for you' },
-        { key: 'study', sym: '✎', label: 'study' },
+        { key: 'directory', sym: '✎', label: 'directory' },
         { key: 'schedule', sym: '▦', label: 'schedule' },
       ].map(item => (
           <button
@@ -91,7 +93,7 @@ export default function HomePage() {
       </div>
 
       <div className="home-sidebar">
-        <p className="sidebar-title">{section.toUpperCase().replace('FORYOU', 'FOR YOU')}</p>
+      <p className="sidebar-title">{section.toUpperCase().replace('FORYOU', 'FOR YOU').replace('DIRECTORY', 'DIRECTORY')}</p>
         {SECTIONS[section].map(item => (
           <div
             key={item}
@@ -146,18 +148,27 @@ export default function HomePage() {
               </div>
             </div>
           </>
-        ) : section === 'study' && sub === 'find partners' ? (
-          <StudyPartnersList />
-        ) : section === 'schedule' && sub === 'my schedule' ? (
-          <ScheduleView userClasses={profile?.current_classes} />
-        ) : (
-          <div className="coming-soon">
-            <p>{sub}</p>
-            <small>coming soon</small>
-          </div>
+          ) : section === 'directory' && sub === 'find people' ? (
+            <StudyPartnersList />
+          ) : section === 'directory' && sub === 'by skill' ? (
+            <TagBrowser mode="skill" />
+          ) : section === 'directory' && sub === 'by class' ? (
+            <TagBrowser mode="class" />
+          ) : section === 'schedule' && sub === 'my schedule' ? (
+            <ScheduleView userClasses={profile?.current_classes} />
+          ) : section === 'profile' && sub === 'my profile' ? (
+            <ProfileView
+              profile={profile}
+              onProfileUpdate={(updated) => setProfile(prev => ({ ...prev, ...updated }))}
+            />
+          ) : (
+            <div className="coming-soon">
+              <p>{sub}</p>
+              <small>coming soon</small>
+            </div>
 
-        )}
-      </div>
+          )}
+</div>
 
       {showHashtagModal && (
         <HashtagModal
