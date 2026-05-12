@@ -1,143 +1,167 @@
 # UniHub
-A campus website for UTRGV College of Engineering and Computer Science (CECS) students 
-to find study partners, discover clubs, stay updated on campus events, and connect with peers.
+
+A campus platform built exclusively for UTRGV CECS students. One place to find study partners, manage your schedule, and connect with classmates.
+
+[take screenshot of: the login page]
 
 ---
 
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [CRUD Convention](#crud-convention)
-- [Tech Stack](#tech-stack)
-- [How to Run the App](#how-to-run-the-app)
-- [Agile Planning](#agile-planning)
-- [Contributors](#contributors)
+## What is UniHub?
+
+UniHub is a social platform for UTRGV College of Engineering and Computer Science students. It lets you find people in your classes, connect with them over email, build a weekly schedule, and express your personality and skills through hashtags.
 
 ---
 
-## Overview
-UniHub is built specifically for UTRGV CECS students. The app is designed to make campus 
-life easier by helping students find academic support, get involved, and stay connected.
+## Tech Stack
 
-| Focus | Description |
-|-------|-------------|
-| Study Partners | Connect with classmates by course or subject |
-| Campus Events | Browse and RSVP to CECS and campus events |
-| Clubs | Find and join UTRGV CECS student organizations |
-| Meet People | Connect with students who share your major or interests |
+**Frontend:** React + Vite  
+**Backend:** Django (Python)  
+**Database:** SQLite  
+**Auth:** Django session-based authentication  
+**Email:** Gmail SMTP via Django  
 
 ---
 
 ## Features
 
-### General Features
-| Feature | Description |
-|---------|-------------|
-| User Registration and Login | Students can create an account and log in securely |
-| Student Profile | Each student has a profile with their major, year, and courses |
-| Study Partner Matching | Find classmates by course or subject to study with |
-| Club Directory | Browse and join UTRGV CECS student organizations |
-| Event Board | View and RSVP to upcoming CECS and campus events |
-| Announcements | Stay updated with school-wide and club announcements |
+### Signup & Login
+- UTRGV email validation (@utrgv.edu only)
+- Secure password hashing via Django
+- Searchable course tag input with full CECS catalog
+- Support for all 8 CECS majors
 
-### Role-Based Features
+![Login Dark](screenshots/login_dark.png)
+![Login Light](screenshots/login_light.png)
 
-#### Student
-| Feature | Description |
-|---------|-------------|
-| Browse Events | View and RSVP to campus and CECS events |
-| Find Study Partners | Search for classmates by course or subject |
-| Join Clubs | Browse and join student organizations |
-| View Announcements | See school-wide and club announcements |
-
-#### Club Officer
-| Feature | Description |
-|---------|-------------|
-| Post Club Events | Create and publish events for their club |
-| Post Club Announcements | Send announcements to club members |
-| Edit Club Profile | Update the club name, description, and details |
-
-#### Admin
-| Feature | Description |
-|---------|-------------|
-| Toggle Mode | Switch between admin control panel and standard member view |
-| School-Wide Announcements | Post announcements visible to all users |
-| Manage Users | View, edit, and remove user accounts |
-| Manage Clubs and Events | Oversee and moderate all clubs and events on the platform |
 
 ---
 
-## CRUD Convention
-| Operation | Description |
-|-----------|-------------|
-| Create | Register an account, build a profile, create groups, and post events |
-| Read | Browse other students profiles, view events, and read posts |
-| Update | Edit your profile, update your posts and events |
-| Delete | Remove your posts, events, or groups |
+### For You Feed
+- Personalized greeting with your name, major, grad year, and classes
+- Your personality and skill hashtags displayed as tags
+- Click to add or edit your hashtags at any time
+
+![Feed](screenshots/feed.png)
 
 ---
 
-## Tech Stack
-| Layer | Technology |
-|-------|------------|
-| Frontend | React + Vite (JavaScript) |
-| Backend | Django (Python) |
-| Styling | HTML + CSS |
-| Database | SQLite |
-| Authentication | Django Built-in Auth System |
-| Version Control | Git and GitHub |
+### Hashtags
+- Two tabs: personality tags (green) and skill tags (orange)
+- Pick up to 15 total
+- Tags show on your profile card in the directory
+
+![Hashtags](screenshots/hashtags.png)
 
 ---
 
-## How to Run the App
+### Directory
+Three ways to find people:
+
+**Find People** — search by name or course, see everyone's classes and hashtags, connect via email  
+
+![Find People](screenshots/find-people.png)
+
+**By Skill** — browse collapsible boxes of skill hashtags, see who has each one  
+
+![By Skill](screenshots/by-skill.png)
+
+**By Class** — browse collapsible boxes by course code, see who is taking each class  
+
+![By Class](screenshots/by-class.png)
+---
+
+### Connect
+- Click Connect on any student card
+- Write a message in the modal
+- Message is sent directly to their UTRGV inbox via Gmail SMTP
+- Button changes to "sent ✓" after sending
+- LinkedIn link appears on cards if the student has added one
+
+![Connect](screenshots/connect.png)
+
+---
+
+### Schedule Builder
+- Monday through Friday grid with time slots from 8AM to 10:45PM
+- Click any cell to assign a class from your current courses
+- Schedule saves to the database and persists on next login
+
+![Schedule](screenshots/schedule.png)
+
+---
+
+### Profile
+Edit your information at any time:
+- LinkedIn URL
+- Preferred name
+- Major
+- Graduation year
+- Current classes
+
+Additional options:
+- **Reset password via email** — generates a new 12-character password and sends it to your UTRGV email
+- **Delete account** — permanently removes your account after password confirmation
+
+![Profile](screenshots/profile.png)
+
+---
+
+## How to Run Locally
 
 ### Prerequisites
-| Requirement | Version |
-|-------------|---------|
-| Node.js | v18+ |
-| Python | 3.x |
+- Python 3.10+
+- Node.js 18+
+- A Gmail account with an App Password
 
-### Terminal 1 — Frontend (React)
-1. Clone the repository: `git clone https://github.com/DanielAguilar25/UniHub.git`
-2. Navigate into the project: `cd UniHub`
-3. Install dependencies: `npm install`
-4. Start the dev server: `npm run dev`
+### Backend Setup
+```bash
+cd backend
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
 
-Frontend runs at: `http://localhost:5173`
+Create a `.env` file in the backend folder:
+EMAIL_HOST_USER=your@gmail.com
+EMAIL_HOST_PASSWORD=your_app_password
 
-### Terminal 2 — Backend (Django)
-1. Navigate into the backend folder: `cd UniHub/backend`
-2. Install Django: `pip install django`
-3. Run migrations: `python manage.py migrate`
-4. Start the server: `python manage.py runserver`
+### Frontend Setup
+```bash
+npm install
+npm run dev
+```
 
-Backend runs at: `http://localhost:8000`
+Create a `.env` file in the root folder:
+VITE_API_URL=http://127.0.0.1:8000
 
-> Both terminals must be running at the same time for the app to work.
-
----
-
-## Agile Planning
-
-UniHub is developed using an Agile methodology, broken into 6 sprints across the semester.
-
-| Sprint | Timeline | Goal |
-|--------|----------|------|
-| Sprint 1 | Feb - Mar 6 | Environment setup, project planning, and requirements |
-| Sprint 2 | Mar - Apr 10 | Wireframes, user stories, home view, and user management |
-| Sprint 3 | Apr | Study partner matching and club directory |
-| Sprint 4 | Apr | Event board and announcements system |
-| Sprint 5 | Late Apr | Frontend and backend integration |
-| Sprint 6 | Early May | Testing, bug fixes, polish, and final documentation |
-
-> Note: Sprint goals and timelines are subject to change as the project evolves.
-
+Open `http://localhost:5173` in your browser.
 
 ---
 
-## Contributors
-| Name | GitHub | Contribution |
-|------|--------|--------------|
-| Daniel Aguilar | @DanielAguilar25 | Project setup and frontend development |
-| Victor Chairez | @victorabiezer | Frontend & backend development |
-| Elyssa Guajardo | @nyoomitsellie | Frontend & backend development |
+## How to Use UniHub
+
+1. Go to `/signup` and create an account with your UTRGV email
+2. Pick your major, graduation year, and current classes
+3. Log in and see your personalized For You feed
+4. Go to your profile and add your LinkedIn URL and hashtags
+5. Go to Directory → Find People to search for classmates
+6. Click Connect to send them a message to their UTRGV inbox
+7. Go to Directory → By Skill or By Class to browse by tag
+8. Go to Schedule to build your weekly class grid
+
+---
+
+## Team
+
+| Name | Role |
+|------|------|
+| Victor Chairez | Backend, API, database, email system, schedule, hashtags |
+| Daniel Aguilar | Frontend components, UI structure, navigation |
+| Elyssa Guajardo | Documentation, testing, QA |
+
+---
+
+## Admin
+
+Django admin is available at `/admin/`. Use your superuser credentials to manage users and profiles.
