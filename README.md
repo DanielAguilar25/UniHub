@@ -30,8 +30,8 @@ UniHub is a social platform for UTRGV College of Engineering and Computer Scienc
 - Searchable course tag input with full CECS catalog
 - Support for all 8 CECS majors
 
-![Login Dark](screenshots/login_dark.png)
-![Login Light](screenshots/login_light.png)
+![Login Dark](login_dark.png)
+![Login Light](login_light.png)
 
 
 ---
@@ -41,7 +41,7 @@ UniHub is a social platform for UTRGV College of Engineering and Computer Scienc
 - Your personality and skill hashtags displayed as tags
 - Click to add or edit your hashtags at any time
 
-![Feed](screenshots/feed.png)
+![Feed](feed.png)
 
 ---
 
@@ -50,7 +50,7 @@ UniHub is a social platform for UTRGV College of Engineering and Computer Scienc
 - Pick up to 15 total
 - Tags show on your profile card in the directory
 
-![Hashtags](screenshots/hashtags.png)
+![Hashtags](hashtags.png)
 
 ---
 
@@ -59,15 +59,15 @@ Three ways to find people:
 
 **Find People** — search by name or course, see everyone's classes and hashtags, connect via email  
 
-![Find People](screenshots/find-people.png)
+![Find People](find-people.png)
 
 **By Skill** — browse collapsible boxes of skill hashtags, see who has each one  
 
-![By Skill](screenshots/by-skill.png)
+![By Skill](by-skill.png)
 
 **By Class** — browse collapsible boxes by course code, see who is taking each class  
 
-![By Class](screenshots/by-class.png)
+![By Class](by-class.png)
 ---
 
 ### Connect
@@ -77,7 +77,7 @@ Three ways to find people:
 - Button changes to "sent ✓" after sending
 - LinkedIn link appears on cards if the student has added one
 
-![Connect](screenshots/connect.png)
+![Connect](connect.png)
 
 ---
 
@@ -86,7 +86,7 @@ Three ways to find people:
 - Click any cell to assign a class from your current courses
 - Schedule saves to the database and persists on next login
 
-![Schedule](screenshots/schedule.png)
+![Schedule](schedule.png)
 
 ---
 
@@ -102,7 +102,7 @@ Additional options:
 - **Reset password via email** — generates a new 12-character password and sends it to your UTRGV email
 - **Delete account** — permanently removes your account after password confirmation
 
-![Profile](screenshots/profile.png)
+![Profile](profile.png)
 
 ---
 
